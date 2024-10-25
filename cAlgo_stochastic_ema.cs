@@ -44,6 +44,10 @@ namespace cAlgo.Robots
 
         protected override void OnBar()
         {
+            // Check if there are any open positions
+            if (Positions.FindAll("StochasticCrossover", SymbolName).Length > 0)
+                return;
+                
             var kValue = _stochastic.PercentK.Last(1);
             var dValue = _stochastic.PercentD.Last(1);
             var atrValue = _atr.Result.Last(1);
