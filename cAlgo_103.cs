@@ -46,8 +46,8 @@ namespace cAlgo.Robots
         [Parameter("Close on Reversal Signal", DefaultValue = true)]
         public bool CloseOnReversalSignal { get; set; }
 
-        [Parameter("Trading Enabled", DefaultValue = true)]
-        public bool TradingEnabled { get; set; }
+        [Parameter("AutoTrading Enabled", DefaultValue = true)]
+        public bool AutoTradingEnabled { get; set; }
 
         protected override void OnStart()
         {
@@ -97,7 +97,7 @@ namespace cAlgo.Robots
                         takeProfitPrice = NormalizePrice(Symbol.Bid + (atrValue * AtrTakeProfitMultiplier));
                         lotSize = riskAmount / ((Symbol.Bid - stopLossPrice) * Symbol.PipValue);
 
-                        if (TradingEnabled)
+                        if (AutoTradingEnabled)
                         {
                             ExecuteMarketOrder(TradeType.Buy, SymbolName, lotSize, "Buy", stopLossPrice, takeProfitPrice);
                         }
@@ -120,7 +120,7 @@ namespace cAlgo.Robots
                         takeProfitPrice = NormalizePrice(Symbol.Ask - (atrValue * AtrTakeProfitMultiplier));
                         lotSize = riskAmount / ((stopLossPrice - Symbol.Ask) * Symbol.PipValue);
 
-                        if (TradingEnabled)
+                        if (AutoTradingEnabled)
                         {
                             ExecuteMarketOrder(TradeType.Sell, SymbolName, lotSize, "Sell", stopLossPrice, takeProfitPrice);
                         }
